@@ -7,6 +7,8 @@
 
 n = 5
 
+# I worked with Jan Wignall
+
 # your code goes here
 sum_n = n
 factorial = n
