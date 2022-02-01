@@ -14,13 +14,13 @@ for i in range(len(dna)):
 	else:
 		frame +=1   #initial attempt  - functional but more complicated than necessary 
 '''
-for i in range(len(dna)):
+for i in range(len(dna)):         #single loop
 	print(i, i%3, dna[i])
 
-for i in range(0, len(dna), 3):
+for i in range(0, len(dna), 3):   #nested
 	for j in range(3):
 		print(i + j, j, dna[i + j])
-
+''''''
 """
 python3 24frame.py
 0 0 A

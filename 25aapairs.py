@@ -5,6 +5,9 @@
 # Skip AA, CC etc.
 # Also print out how many combinations there are
 
+
+#worked with Evan Tan
+
 '''
 for amino_one in aa:
 	for amino_two in aa:
@@ -18,19 +21,22 @@ for amino_one in aa:
 		else:
 			continue
 print(new_list)
-print(count)        ###initial attempt 
+print(count)        ###initial attempt   
 '''
 
 aa = 'ACDEFGHIKLMNPQRSTVWY'
 count = 0
 
 
-for x in range(len(aa)):
+for x in range(len(aa)):             #nested
 	for y in range(x+1, len(aa)):
 		count += 1
 		print(aa[x] + ' ' + aa[y])
 print(count)
 			
+for x in aa:   #alt
+	for y in aa:
+		if x > y: print(x,y)
 	
 """
 python3 25aapairs.py
