@@ -7,14 +7,15 @@
 
 seq = 'ACGACGCAGGAGGAGAGTTTCAGAGATCACGAATACATCCATATTACCCAGAGAGAG'
 w = 11
-GC = 0
+
 for i in range(len(seq) - (w-1)):
+	GC = 0
 	for nt in seq[i:i+w]:
 		if nt == 'G' or nt == 'C':
 			GC +=1
 	fraction = GC / (w)
 	print(i, seq[i:i+w],  f'{fraction:.4f}')
-	GC = 0
+	
 """
 python3 26gcwin.py
 0 ACGACGCAGGA 0.6364
