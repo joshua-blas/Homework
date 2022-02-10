@@ -13,24 +13,18 @@ for x in sys.argv[1:]:
 	data.append(flt)
 
 count = len(data) 
+	
 minimum = None
-for num in data:
-	if minimum == None:
-		minimum = num
-		continue
-	if num < minimum:
-		minimum = None
-		minimum = num
-
 maximum = None
 for num in data:
-	if maximum == None:
+	if minimum == None and maximum == None:
+		minimum = num
 		maximum = num
-		continue
+	if num < minimum:
+		minimum = num
 	if num > maximum:
-		maximum = None
 		maximum = num
-		
+
 total_sum = 0
 for num in data:
 	total_sum += num
