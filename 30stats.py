@@ -13,23 +13,22 @@ for x in sys.argv[1:]:
 	data.append(flt)
 
 count = len(data) 
-	
-minimum = None
-maximum = None
+
+#max and min
+minimum = data[0]
+maximum = data[0]
 for num in data:
-	if minimum == None and maximum == None:
-		minimum = num
-		maximum = num
 	if num < minimum:
 		minimum = num
 	if num > maximum:
 		maximum = num
-
+# mean
 total_sum = 0
 for num in data:
 	total_sum += num
 mean = total_sum / count
 
+#standard deviation
 numerator = 0
 for num in data:
 	distance = (num - mean)**2
@@ -37,12 +36,15 @@ for num in data:
 
 stdev = math.sqrt(numerator/ count)
 
+#median
 data.sort()
+#even number inputs
 if (count % 2) == 0:
 	upper = math.ceil(count/2)
 	lower = math.floor(count/2)
 	
 	median = (data[upper] + data[lower])/2
+#odd number inputs
 else:
 	median = data[count//2]
 	
