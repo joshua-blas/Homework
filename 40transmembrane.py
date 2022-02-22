@@ -16,7 +16,7 @@ import sys
 #   Create a function for KD calculation
 #   Create a function for amphipathic alpha-helix
 
-def score(code):
+def score(code): #made a separate function for attributing value to AA to make neater
 		if code == 'I': return 4.5
 		elif code == 'V': return 4.2
 		elif code == 'L': return 3.8
@@ -37,48 +37,48 @@ def score(code):
 		elif code == 'N': return -3.5
 		elif code == 'K': return -3.9
 		elif code == 'R': return -4.5
-		return 0
+		return 0 #if none of the above put 0
 	
-def check_proline(seq):
+def check_proline(seq): #check if P in the alpha helix
 	if 'P' in seq:
 		return True
 	else:
 		return False
 
-def KD(seq, window=0, threshold=0, check_alpha = False):
+def KD(seq, window=0, threshold=0, check_alpha = False): #KD calculation. check_alpha is a varaible that dictates whether the proline check function will be executed
 	total = 0
-	for i in range(window):
-		total += score(seq[i])
-	for pos in range(len(seq) - (window - 1)):
+	for i in range(window): 
+		total += score(seq[i]) #check score for each value in first window
+	for pos in range(len(seq) - (window - 1)): #moving window
 		if pos > 0:
-			total += score(seq[pos + window - 1]) - score(seq[pos-1])
+			total += score(seq[pos + window - 1]) - score(seq[pos-1]) #add one more value on the end, subtract off the other end
 		avg = total / window
-		if avg > threshold and (check_alpha == False or check_proline(seq[pos:pos+window]) == False):
+		if avg > threshold and (check_alpha == False or check_proline(seq[pos:pos+window]) == False): #If threshold is surpassed, and either proline check is being skipped/returned that no P was present, print true
 			return True
 
-	return False
+	return False #if the none of the windows fulfill the criteria, print false
 
 
 fp = open(sys.argv[1])
 assert(len(sys.argv) == 2)
 line = fp.readline()
 
-while line:
+while line: #loop through while there are still lines in the file to go through
 	if line[0] == '>':
-		name = line.split(' | ')
-		protein = name[0]
-		protein = protein[1:]
+		name = line.split(' | ') #split each informational segment in the first line into a new list since each segment is separated by two spaces and a |
+		protein = name[0] #first segment
+		protein = protein[1:] #take off the '>'
 
 		data = ''
-		line = fp.readline()
+		line = fp.readline() #move to next line
 		while line:
-			data += line[0:len(line) - 1]
-			if data[len(data) - 1] == '*':
+			data += line[0:len(line) - 1] #add each line to a string of data that will actually be analyzed (minus the \n at the end)
+			if data[len(data) - 1] == '*': #if the asterisk is encountered, take off the asterisk and stop the loop
 				data = data[0:len(data)-1]
 				break
-			line = fp.readline()
+			line = fp.readline() #move to the next line if there is no asterisk
 
-		condition1 = KD(data[0:30], 8, 2.5, False) 
+		condition1 = KD(data[0:30], 8, 2.5, False)  
 		condition2 = KD(data[30:], 11, 2.0, True)
 		if condition1 == True and condition2 == True:
 			print(protein)
