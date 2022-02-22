@@ -16,6 +16,9 @@ import sys
 #   Create a function for KD calculation
 #   Create a function for amphipathic alpha-helix
 
+
+#Worked with Jeremy 
+
 def score(code): #made a separate function for attributing value to AA to make neater
 		if code == 'I': return 4.5
 		elif code == 'V': return 4.2
