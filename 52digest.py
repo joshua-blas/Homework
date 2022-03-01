@@ -11,7 +11,7 @@ import sys
 # The output should be the sizes of the restriction fragments
 
 filename = sys.argv[1]		
-def readfasta(filename):
+def readfile(filename):
 	seq = ''
 	with open(filename) as fp:
 		for line in fp.readlines():
@@ -26,7 +26,7 @@ def readfasta(filename):
 					seq += fragment
 	return seq
 	
-seq = readfasta(filename)
+seq = readfile(filename)
 rsite = sys.argv[2]
 start = None
 for match in re.finditer(rsite, seq):
